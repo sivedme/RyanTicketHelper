@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<style>
+  table, td, th {
+    border: 1px solid black;
+  }
+
+  table {
+    width: 400px;
+    border-collapse: collapse;
+  }
+
+  th {
+    height: 70px;
+  }
+</style>
+<script>
+  function getAirportCheapest() {
+    let airport = prompt("Please enter airport to show cheapest fares from:", "KBP");
+    if (airport) location.replace("/cheapest/" + airport);
+  }
+  function getAirportRoutes() {
+    let airport = prompt("Please enter airport to show routes from:", "KBP");
+    if (airport) location.replace("/routes/" + airport);
+  }
+  function getAirportsForRoute() {
+    let airportDep = prompt("Please enter departure airport:", "KBP");
+    let airportArr;
+    if (airportDep) airportArr = prompt("Please enter arrival airport:", "ATH");
+    if (airportDep && airportArr) location.replace("/fares/" + airportDep + "/" + airportArr);
+  }
+
+</script>
+<body>
+<h3>Welcome to Main page</h3>
+<table>
+  <tr>
+    <td>Cheapest fares from selected airport</td>
+    <td><input type="button" onclick="getAirportCheapest()" value="Click"></td>
+  </tr>
+  <tr>
+    <td>Show all routes available from selected airport</td>
+    <td><input type="button" onclick="getAirportRoutes()" value="Click"></td>
+  </tr>
+  <tr>
+    <td>Show all fares for route</td>
+    <td><input type="button" onclick="getAirportsForRoute()" value="Click"></td>
+  </tr>
+
+</table>
+
+</body>
+</html>

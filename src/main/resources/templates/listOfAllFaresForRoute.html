@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<style>
+  table, td, th {
+    border: 1px solid black;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: separate;
+  }
+</style>
+<body>
+<a th:href="@{/}">Return to main page</a>
+<h3>All Fares For Route <a th:text="${depAirport}"></a> – <a th:text="${arrAirport}"></a></h3>
+<table>
+    <tr th:each="price, dates : ${allFaresForRoute.getOutbound().clean()}">
+      <td th:text="${price.getKey().getStringValue(false)}"></td>
+      <td th:text="${price.getValue().toString().replace('[', ' ').replace(']', ' ')}"></td>
+    </tr>
+</table>
+</body>
+</html>

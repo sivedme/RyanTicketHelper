@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<style>
+  table, td, th {
+    border: 1px solid black;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+</style>
+<body>
+<a th:href="@{/}">Return to main page</a>
+<table>
+  <tr th:each="route : ${routeList}">
+    <td th:text="${route}"></td>
+  </tr>
+</table>
+</body>
+</html>
