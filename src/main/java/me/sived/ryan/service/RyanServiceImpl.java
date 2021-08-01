@@ -1,9 +1,6 @@
 package me.sived.ryan.service;
 
-import me.sived.ryan.logic.AllFaresForRouteLogic;
-import me.sived.ryan.logic.AllFaresLogic;
-import me.sived.ryan.logic.CheapestFaresLogic;
-import me.sived.ryan.logic.RoutesLogic;
+import me.sived.ryan.logic.*;
 import me.sived.ryan.models.Result;
 import me.sived.ryan.models.Route;
 import org.springframework.stereotype.Service;
@@ -20,7 +17,7 @@ public class RyanServiceImpl implements RyanService {
     }
 
     @Override
-    public Route[] getRoutesFrom(String airport) {
+    public List<Route> getRoutesFrom(String airport) {
         return new RoutesLogic().from(airport);
     }
 
@@ -33,4 +30,11 @@ public class RyanServiceImpl implements RyanService {
     public AllFaresForRouteLogic.RouteFareJson getAllFaresForRoute(String depAirport, String arrAirport) {
         return new AllFaresForRouteLogic().fromAndTo(depAirport, arrAirport);
     }
+
+    @Override
+    public Map<Double, Route[]> teleport(String depAirport, String arrAirport) {
+        return new Teleport().takeMeTo(depAirport, arrAirport);
+    }
+
+
 }

@@ -8,12 +8,15 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class RoutesLogic {
 
     static HttpClient httpClient = HttpClient.newHttpClient();
 
-    public Route[] from(String airportCode) {
+    public List<Route> from(String airportCode) {
 
         HttpRequest request = HttpRequest.newBuilder().GET()
                 .uri(URI.create("https://services-api.ryanair.com/locate/3/routes/" + airportCode.toUpperCase()))
@@ -22,7 +25,9 @@ public class RoutesLogic {
         try {
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                     .create();
-            return gson.fromJson(httpClient.send(request, HttpResponse.BodyHandlers.ofString()).body(), Route[].class);
+            Route[] routes = gson.fromJson(httpClient.send(request, HttpResponse.BodyHandlers.ofString()).body(), Route[].class);
+            List<Route> copy = Arrays.stream(routes).filter(route -> route.getConnectingAirport() == null).collect(Collectors.toList());
+            return copy;
         } catch (Exception e) {
             e.printStackTrace();
         }

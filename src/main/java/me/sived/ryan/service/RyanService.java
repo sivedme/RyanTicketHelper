@@ -11,7 +11,9 @@ import java.util.Map;
 @Service
 public interface RyanService {
     Result getCheapestFaresFrom(String airport);
-    Route[] getRoutesFrom(String airport);
+    List<Route> getRoutesFrom(String airport);
     List getAllFaresFrom(String airport);
     AllFaresForRouteLogic.RouteFareJson getAllFaresForRoute(String depAirport, String arrAirport);
+
+    Map<Double, Route[]> teleport(String depAirport, String arrAirport);
 }

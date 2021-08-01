@@ -16,10 +16,10 @@ public class AllFaresLogic {
 
     public List from(String airportCode) {
 
-        Route[] routes = new RoutesLogic().from(airportCode);
+        List<Route> routes = new RoutesLogic().from(airportCode);
         ArrayList<RouteFareJson> fares = new ArrayList<>();
 
-        Arrays.stream(routes).forEach(iterator ->
+        routes.forEach(iterator ->
         {
             try {
                 RouteFareJson temp = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create().fromJson(

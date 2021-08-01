@@ -6,10 +6,12 @@ import java.util.List;
 
 public class Route {
         String airportFrom, airportTo;
+        String connectingAirport;
 
-        public Route(String airportFrom, String airportTo) {
+        public Route(String airportFrom, String airportTo, String connectingAirport) {
             this.airportFrom = airportFrom;
             this.airportTo = airportTo;
+            this.connectingAirport = connectingAirport;
         }
 
         public String getAirportFrom() {
@@ -20,7 +22,11 @@ public class Route {
             return airportTo;
         }
 
-        @Override
+    public String getConnectingAirport() {
+        return connectingAirport;
+    }
+
+    @Override
         public String toString() {
             return airportFrom + "-" + airportTo;
         }

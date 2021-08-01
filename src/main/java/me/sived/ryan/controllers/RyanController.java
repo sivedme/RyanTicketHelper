@@ -72,5 +72,15 @@ public class RyanController {
         return modelAndView;
     }
 
+    /* Returns all fares for all routes from selected airport */
+    @GetMapping("/teleport/{depAirport}/{arrAirport}")
+    public ModelAndView teleport(@PathVariable String depAirport, @PathVariable String arrAirport) {
+        logger.info("Showing a teleport feature " + depAirport + " " + arrAirport);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("teleportList", ryanService.teleport(depAirport, arrAirport));
+        modelAndView.setViewName("teleport");
+        return modelAndView;
+    }
+
 
 }
