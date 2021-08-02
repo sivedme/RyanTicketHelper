@@ -3,10 +3,10 @@ package me.sived.ryan.service;
 import me.sived.ryan.logic.*;
 import me.sived.ryan.models.Result;
 import me.sived.ryan.models.Route;
+import me.sived.ryan.models.RouteFare;
 import me.sived.ryan.models.RouteFareJson;
 import org.springframework.stereotype.Service;
 
-import me.sived.ryan.service.RyanService;
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +36,7 @@ public class RyanServiceImpl implements RyanService {
     }
 
     @Override
-    public Map<Double, Route[]> teleport(String depAirport, String arrAirport) {
+    public Map<RouteFare[], Double> teleport(String depAirport, String arrAirport) {
         return new Teleport().takeMeTo(depAirport, arrAirport);
     }
 

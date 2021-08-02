@@ -34,6 +34,12 @@
     if (airportDep) airportArr = prompt("Please enter arrival airport:", "ATH");
     if (airportDep && airportArr) location.replace("/fares/" + airportDep + "/" + airportArr);
   }
+  function getAirportsForTeleport() {
+    let airportDep = prompt("Please enter departure airport:", "KBP");
+    let airportArr;
+    if (airportDep) airportArr = prompt("Please enter arrival airport:", "TFN");
+    if (airportDep && airportArr) location.replace("/teleport/" + airportDep + "/" + airportArr);
+  }
 
 </script>
 <body>
@@ -50,6 +56,10 @@
   <tr>
     <td>Show all fares for route</td>
     <td><input type="button" onclick="getAirportsForRoute()" value="Click"></td>
+  </tr>
+  <tr>
+    <td>Teleport</td>
+    <td><input type="button" onclick="getAirportsForTeleport()" value="Click"></td>
   </tr>
 
 </table>
