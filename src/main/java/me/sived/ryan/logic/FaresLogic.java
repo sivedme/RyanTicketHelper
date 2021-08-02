@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import me.sived.ryan.models.Result;
 import me.sived.ryan.models.Route;
 import me.sived.ryan.models.RouteFareJson;
-import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
