@@ -3,17 +3,21 @@ package me.sived.ryan.service;
 import me.sived.ryan.logic.*;
 import me.sived.ryan.models.Result;
 import me.sived.ryan.models.Route;
+import me.sived.ryan.models.RouteFareJson;
 import org.springframework.stereotype.Service;
 
+import me.sived.ryan.service.RyanService;
 import java.util.List;
 import java.util.Map;
 
 @Service
 public class RyanServiceImpl implements RyanService {
 
+    private FaresLogic logic = new FaresLogic();
+
     @Override
     public Result getCheapestFaresFrom(String airport) {
-        return new CheapestFaresLogic().from(airport);
+        return logic.cheapestFaresFrom(airport);
     }
 
     @Override
@@ -23,12 +27,12 @@ public class RyanServiceImpl implements RyanService {
 
     @Override
     public List getAllFaresFrom(String airport) {
-        return new AllFaresLogic().from(airport);
+        return logic.allFaresFrom(airport);
     }
 
     @Override
-    public AllFaresForRouteLogic.RouteFareJson getAllFaresForRoute(String depAirport, String arrAirport) {
-        return new AllFaresForRouteLogic().fromAndTo(depAirport, arrAirport);
+    public RouteFareJson getAllFaresForRoute(String depAirport, String arrAirport) {
+        return logic.allFaresForRoute(depAirport, arrAirport);
     }
 
     @Override

@@ -12,11 +12,12 @@
 
   table {
     width: 100%;
-    border-collapse: separate;
+    border-collapse: collapse;
   }
 </style>
 <body>
 <a th:href="@{/}">Return to main page</a>
+<a th:href="@{'/fares/' + ${arrAirport} + '/' + ${depAirport}}">Show fares for outbound route</a>
 <h3>All Fares For Route <a th:text="${depAirport}"></a> – <a th:text="${arrAirport}"></a></h3>
 <table>
     <tr th:each="price, dates : ${allFaresForRoute.getOutbound().clean()}">
