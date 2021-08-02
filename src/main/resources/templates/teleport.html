@@ -17,11 +17,17 @@
 </style>
 <body>
 <a th:href="@{/}">Return to main page</a>
+<a th:href="@{'/teleport/' + ${arrAirport} + '/' + ${depAirport}}">Show fares for outbound route</a>
 <table>
+    <tr>
+        <th>Flights</th>
+        <th>Date and time</th>
+        <th>€</th>
+    </tr>
     <tr th:each="map : ${teleportList}">
-        <td th:text="${map.getValue()[0]}"></td>
-        <td th:text="${map.getValue()[1]}"></td>
-        <td th:text="${map.getKey()}"></td>
+        <td th:utext="|${map.getKey()[0].getRoute()}<br />${map.getKey()[1].getRoute()}|"></td>
+        <td th:utext="|${map.getKey()[0].getStringDateAndTime()}<br />${map.getKey()[1].getStringDateAndTime()}|"></td>
+        <td th:text="${map.getValue()} % 1 == 0? ${map.getValue()} :${#numbers.formatDecimal(map.getValue(), 0, 2)}"></td>
     </tr>
 </table>
 </body>

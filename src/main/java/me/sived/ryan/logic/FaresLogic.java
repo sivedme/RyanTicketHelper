@@ -22,12 +22,12 @@ public class FaresLogic {
     static HttpClient httpClient = HttpClient.newHttpClient();
     Logger logger = LoggerFactory.getLogger(FaresLogic.class);
 
-    // AllFaresLogic
+    // AllFaresLogic (not in use)
     public List allFaresFrom(String airportCode) {
 
         ArrayList<RouteFareJson> fares = new ArrayList<>();
 
-        new RoutesLogic().from(airportCode).forEach(iterator ->
+        new RoutesLogic().from(airportCode).parallelStream().forEach(iterator ->
         {
             try {
                 RouteFareJson temp = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create().fromJson(
@@ -43,8 +43,6 @@ public class FaresLogic {
 
 
     //AllFaresForRoute
-
-
     public RouteFareJson allFaresForRoute(String dep, String arr) {
         HttpRequest request = HttpRequest.newBuilder().GET().uri(URI.create("https://www.ryanair.com/api/farfnd/3/oneWayFares/" + dep + "/" + arr + "/cheapestPerDay?outboundDateFrom=2021-07-21&outboundDateTo=2023-02-01")).build();
         return getRouteFareJson(dep, arr, request);
@@ -60,7 +58,7 @@ public class FaresLogic {
             RouteFareJson fareJson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create().fromJson(
                     httpClient.send(request, HttpResponse.BodyHandlers.ofString()).body(), RouteFareJson.class);
             if (fareJson.getOutbound() == null) return null;
-            Arrays.stream(fareJson.getOutbound().getFares()).forEach(routeFare -> routeFare.setRoute(new Route(dep, arr, null)));
+            Arrays.stream(fareJson.getOutbound().getFares()).parallel().forEach(routeFare -> routeFare.setRoute(new Route(dep, arr, null)));
             return fareJson;
 
         } catch (Exception e) {
@@ -71,7 +69,6 @@ public class FaresLogic {
 
 
     //CheapestFares
-
     public Result cheapestFaresFrom(String airportCode) {
 
         HttpRequest request = HttpRequest.newBuilder().GET()

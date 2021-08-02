@@ -26,7 +26,7 @@ public class RoutesLogic {
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                     .create();
             Route[] routes = gson.fromJson(httpClient.send(request, HttpResponse.BodyHandlers.ofString()).body(), Route[].class);
-            List<Route> copy = Arrays.stream(routes).filter(route -> route.getConnectingAirport() == null).collect(Collectors.toList());
+            List<Route> copy = Arrays.stream(routes).parallel().filter(route -> route.getConnectingAirport() == null).collect(Collectors.toList());
             return copy;
         } catch (Exception e) {
             e.printStackTrace();
