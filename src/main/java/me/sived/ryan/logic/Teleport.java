@@ -80,7 +80,7 @@ public class Teleport {
             tempMap.forEach((keyTwo, valueTwo) -> {
                 logger.info("> initializing tempMap forEach " + keyTwo + " " + valueTwo);
                 resMap.put(key.getValue() + keyTwo.getValue(), new Route[]{fare.getRoute(), new Route(fare.getRoute().getAirportTo(), valueTwo.get(0).getRoute().getAirportTo(), null)});
-                logger.info("ResMap = " + resMap.toString());
+                logger.info("ResMap = " + resMap);
             });
         });
         logger.info("Returning resMap " + resMap.values());
