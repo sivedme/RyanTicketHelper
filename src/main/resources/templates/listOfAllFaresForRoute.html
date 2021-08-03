@@ -2,27 +2,37 @@
 <html
         xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Getting Started: Serving Web Content</title>
+  <title>All Fares : RyanAir Helper</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <style>
   table, td, th {
     border: 1px solid black;
+      padding: 10px 20px; line-height:1.4;
   }
 
   table {
-    width: 100%;
     border-collapse: collapse;
+  }
+
+  #dates {
+      max-width: 600px;
+      padding: 5px 10px;
+      letter-spacing: 0.6px;
   }
 </style>
 <body>
-<a th:href="@{/}">Return to main page</a>
+<a th:href="@{/}">Return to main page&nbsp;</a>
 <a th:href="@{'/fares/' + ${arrAirport} + '/' + ${depAirport}}">Show fares for outbound route</a>
 <h3>All Fares For Route <a th:text="${depAirport}"></a> – <a th:text="${arrAirport}"></a></h3>
 <table>
+    <tr>
+        <th>Price</th>
+        <th>Dates</th>
+    </tr>
     <tr th:each="price, dates : ${allFaresForRoute.getOutbound().clean()}">
-      <td th:text="${price.getKey().getStringValue(false)}"></td>
-      <td th:text="${price.getValue().toString().replace('[', ' ').replace(']', ' ')}"></td>
+      <td th:text="${price.getKey().getStringValue(false)}" ></td>
+      <td th:text="${price.getValue().toString().replace('[', ' ').replace(']', ' ')}" id="dates"></td>
     </tr>
 </table>
 </body>

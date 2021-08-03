@@ -13,31 +13,31 @@ import java.util.Map;
 @Service
 public class RyanServiceImpl implements RyanService {
 
-    private FaresLogic logic = new FaresLogic();
+    private final FaresLogic logic = new FaresLogic();
 
     @Override
     public Result getCheapestFaresFrom(String airport) {
-        return logic.cheapestFaresFrom(airport);
+        return logic.cheapestFaresFrom(airport.toUpperCase());
     }
 
     @Override
     public List<Route> getRoutesFrom(String airport) {
-        return new RoutesLogic().from(airport);
+        return new RoutesLogic().from(airport.toUpperCase());
     }
 
     @Override
     public List getAllFaresFrom(String airport) {
-        return logic.allFaresFrom(airport);
+        return logic.allFaresFrom(airport.toUpperCase());
     }
 
     @Override
     public RouteFareJson getAllFaresForRoute(String depAirport, String arrAirport) {
-        return logic.allFaresForRoute(depAirport, arrAirport);
+        return logic.allFaresForRoute(depAirport.toUpperCase(), arrAirport.toUpperCase());
     }
 
     @Override
     public Map<RouteFare[], Double> teleport(String depAirport, String arrAirport) {
-        return new Teleport().takeMeTo(depAirport, arrAirport);
+        return new Teleport().takeMeTo(depAirport.toUpperCase(), arrAirport.toUpperCase());
     }
 
 

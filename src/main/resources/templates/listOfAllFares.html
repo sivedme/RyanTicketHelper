@@ -2,7 +2,7 @@
 <html
         xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Getting Started: Serving Web Content</title>
+  <title>All Fares : RyanAir Helper</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <style>
@@ -11,12 +11,11 @@
   }
 
   table {
-    width: 100%;
     border-collapse: collapse;
   }
 </style>
 <body>
-<a th:href="@{/}">Return to main page</a>
+<a th:href="@{/}">Return to main page&nbsp;</a>
 <table>
   <tr th:each="fare : ${allFaresList}">
     <td th:text="${fare}"></td>

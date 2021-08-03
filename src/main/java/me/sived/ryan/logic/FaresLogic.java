@@ -26,7 +26,7 @@ public class FaresLogic {
 
         ArrayList<RouteFareJson> fares = new ArrayList<>();
 
-        new RoutesLogic().from(airportCode).parallelStream().forEach(iterator ->
+        new RoutesLogic().from(airportCode).forEach(iterator ->
         {
             try {
                 RouteFareJson temp = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create().fromJson(

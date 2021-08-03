@@ -2,36 +2,38 @@
 <html
         xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Getting Started: Serving Web Content</title>
+  <title>Cheap Fares : RyanAir Helper</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <style>
   table, td, th {
     border: 1px solid black;
+    padding: 5px 20px;
   }
 
   table {
-    width: 100%;
     border-collapse: collapse;
   }
 </style>
 <body>
-<a th:href="@{/}">Return to main page</a>
+<a th:href="@{/}">Return to main page&nbsp;</a>
 <h3>Cheapest routes from <a th:text="${fareList.get(0).getDepartureAirport().name}"></a></h3>
 <table>
   <tr>
     <th>Price</th>
     <th>Destination</th>
     <th>Date</th>
+    <th></th>
   </tr>
   <tr th:each="fare : ${fareList}">
     <td th:text="${fare.getFlightPriceString()}"></td>
     <td th:text="${fare.getArrivalAirportString()}"></td>
     <td> <a th:text="${fare.getSimpleDateString()}"></a>
 <!--      <a href="/fares/'/'${fare.getArrivalAirport().iataCode}"></a>-->
-      <a th:href="@{/fares/{dep}/{arr}(dep=${fare.getDepartureAirport().iataCode}, arr=${fare.getArrivalAirport().iataCode})}">Show all</a>
+<!--      <a th:href="@{/fares/{dep}/{arr}(dep=${fare.getDepartureAirport().iataCode}, arr=${fare.getArrivalAirport().iataCode})}">Show all</a>-->
 <!--   <input type='button' class="btn-show-all" name='btn-show' value='Show all' th:onclick="|window.location.href='/fares/'${fare.getDepartureAirport().iataCode}'/'${fare.getArrivalAirport().iataCode}|" />-->
     </td>
+    <td><a th:href="@{/fares/{dep}/{arr}(dep=${fare.getDepartureAirport().iataCode}, arr=${fare.getArrivalAirport().iataCode})}">Show all</a></td>
   </tr>
 </table>
 </body>

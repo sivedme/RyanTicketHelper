@@ -2,21 +2,21 @@
 <html
         xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Getting Started: Serving Web Content</title>
+  <title>Routes : RyanAir Helper</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <style>
   table, td, th {
     border: 1px solid black;
+    padding: 5px 20px; line-height:1.5;
   }
 
   table {
-    width: 100%;
     border-collapse: collapse;
   }
 </style>
 <body>
-<a th:href="@{/}">Return to main page</a>
+<a th:href="@{/}">Return to main page&nbsp;</a>
 <table>
   <tr th:each="route : ${routeList}">
     <td th:text="${route}"></td>

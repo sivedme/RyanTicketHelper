@@ -8,6 +8,7 @@ public class RouteFare {
         Date arrivalDate, departureDate;
         Price price;
         Route route;
+        String label;
 
         public RouteFare(Route route, Price price, Date departureDate, Date arrivalDate) {
             this.arrivalDate = arrivalDate;
@@ -51,8 +52,15 @@ public class RouteFare {
             return format.format(getDepartureDate());
         }
 
+    public String getLabel() {
+        return label;
+    }
 
-        @Override
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    @Override
         public String toString() {
             //return price == null ? null : getDayAndMonth() + " " + price;
             return price == null ? null : getDayAndMonth();
