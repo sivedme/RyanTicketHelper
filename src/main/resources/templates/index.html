@@ -41,6 +41,16 @@
     if (airportDep) airportArr = prompt("Please enter arrival airport:", "TFN");
     if (airportDep && airportArr) location.replace("/teleport/" + airportDep + "/" + airportArr);
   }
+  function getDataForTeleportReturn() {
+    let airportDep = prompt("Please enter departure airport:", "KBP");
+    let airportArr, dateFrom, dateTo, lengthFrom, lengthTo;
+    if (airportDep) airportArr = prompt("Please enter arrival airport:", "TFN");
+    if (airportArr) dateFrom = prompt("Enter dateFrom in format YYYY-MM-DD", "2021-09-01");
+    if (dateFrom) dateTo = prompt("Enter dateTo in format YYYY-MM-DD", "2021-09-30");
+    if (dateTo) lengthFrom = prompt("Enter minimum length of stay in days", "2");
+    if (lengthFrom) lengthTo = prompt("Enter maximum length of stay in days", "4");
+    if (lengthTo) location.replace("/teleport/" + airportDep + "/" + airportArr + "/" + dateFrom + "/" + dateTo + "/" + lengthFrom + "," + lengthTo);
+  }
 
 </script>
 <body>
@@ -61,6 +71,10 @@
   <tr>
     <td>Teleport</td>
     <td><input type="button" onclick="getAirportsForTeleport()" value="Click"></td>
+  </tr>
+  <tr>
+    <td>Teleport Return</td>
+    <td><input type="button" onclick="getDataForTeleportReturn()" value="Click"></td>
   </tr>
 
 </table>

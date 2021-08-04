@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Teleport : RyanAir Helper</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<style>
+    table, td, th {
+        border: 1px solid black;
+        padding: 5px 20px; line-height:1.5;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+</style>
+<body>
+<a th:href="@{/}">Return to main page</a>
+<!--<a th:href="@{'/teleport/' + ${arrAirport} + '/' + ${depAirport}}">Show fares for outbound route&nbsp;</a>-->
+<table>
+    <tr>
+        <th colspan="3">Outbound</th>
+        <th colspan="3">Return</th>
+        <th rowspan="2">Price</th>
+    </tr>
+    <tr>
+        <th>Flights</th>
+        <th>Date and time</th>
+        <th>Transfer time</th>
+        <th>Flights</th>
+        <th>Date and time</th>
+        <th>Transfer time</th>
+    </tr>
+    <tr th:each="map : ${teleportList}">
+        <td th:utext="|${map.getKey()[0].getRoute()}<br />${map.getKey()[1].getRoute()}|"></td>
+        <td th:utext="|${map.getKey()[0].getStringDateAndTime()}<br />${map.getKey()[1].getStringDateAndTime()}|"></td>
+        <td th:text="${map.getKey()[1].getLabel()}"></td>
+        <td th:utext="|${map.getKey()[2].getRoute()}<br />${map.getKey()[3].getRoute()}|"></td>
+        <td th:utext="|${map.getKey()[2].getStringDateAndTime()}<br />${map.getKey()[3].getStringDateAndTime()}|"></td>
+        <td th:text="${map.getKey()[3].getLabel()}"></td>
+        <td><a>€</a><a th:text="${map.getValue()} % 1 == 0? ${map.getValue()} :${#numbers.formatDecimal(map.getValue(), 0, 2)}"></a></td>
+    </tr>
+</table>
+</body>
+</html>

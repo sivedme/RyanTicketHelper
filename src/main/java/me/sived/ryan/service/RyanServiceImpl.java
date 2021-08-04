@@ -36,8 +36,28 @@ public class RyanServiceImpl implements RyanService {
     }
 
     @Override
+    public RouteFareJson getAllFaresForRouteAndDates(String depAirport, String arrAirport, String dateFrom, String dateTo) {
+        return logic.allFaresForRouteAndDates(depAirport.toUpperCase(), arrAirport.toUpperCase(), dateFrom, dateTo);
+    }
+
+    @Override
     public Map<RouteFare[], Double> teleport(String depAirport, String arrAirport) {
         return new Teleport().takeMeTo(depAirport.toUpperCase(), arrAirport.toUpperCase());
+    }
+
+    @Override
+    public Map<RouteFare[], Double> teleport(String depAirport, String arrAirport, String dateFrom, String dateTo) {
+        return new Teleport().takeMeTo(depAirport.toUpperCase(), arrAirport.toUpperCase(), dateFrom, dateTo);
+    }
+
+    @Override
+    public Map<RouteFare[], Double> teleportAndBack(String depAirport, String arrAirport, String length) {
+        return null;
+    }
+
+    @Override
+    public Map<RouteFare[], Double> teleportAndBack(String depAirport, String arrAirport, String dateFrom, String dateTo, String length) {
+        return new Teleport().takeMeToAndBack(depAirport, arrAirport, dateFrom, dateTo, length);
     }
 
 

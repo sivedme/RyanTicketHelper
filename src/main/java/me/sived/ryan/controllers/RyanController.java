@@ -53,6 +53,17 @@ public class RyanController {
     }
 
     /* Returns all fares for selected route */
+    @GetMapping("/fares/{depAirport}/{arrAirport}/{dateFrom}/{dateTo}")
+    public ModelAndView showAllFaresForRoute(@PathVariable String depAirport, @PathVariable String arrAirport,
+                                             @PathVariable String dateFrom, @PathVariable String dateTo) {
+        logger.info("Showing a list of all fares from airport " + depAirport + " to " + arrAirport + " " + dateFrom + " " + dateTo);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("allFaresForRoute", ryanService.getAllFaresForRouteAndDates(depAirport, arrAirport, dateFrom, dateTo));
+        modelAndView.setViewName("listOfAllFaresForRoute");
+        return modelAndView;
+    }
+
+    /* Returns all fares for selected route */
     @GetMapping("/fares/{depAirport}/{arrAirport}")
     public ModelAndView showAllFaresForRoute(@PathVariable String depAirport, @PathVariable String arrAirport) {
         logger.info("Showing a list of all fares from airport " + depAirport + " to " + arrAirport);
@@ -69,6 +80,41 @@ public class RyanController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("allFaresList", ryanService.getAllFaresFrom(airport));
         modelAndView.setViewName("listOfAllFares");
+        return modelAndView;
+    }
+
+    /* Returns all fares for all routes from selected airport */
+    @GetMapping("/teleport/{depAirport}/{arrAirport}/{dateFrom}/{dateTo}/{length}")
+    public ModelAndView teleport(@PathVariable String depAirport, @PathVariable String arrAirport,
+                                 @PathVariable String dateFrom, @PathVariable String dateTo,
+                                 @PathVariable String length) {
+        logger.info("Showing a return teleport feature " + depAirport + " " + arrAirport + " " + dateFrom + " " + dateTo + " " + length);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("teleportList", ryanService.teleportAndBack(depAirport, arrAirport, dateFrom, dateTo, length));
+        modelAndView.setViewName("teleportAndBack");
+        return modelAndView;
+    }
+
+    /* Returns all fares for all routes from selected airport */
+    @GetMapping("/teleport/{depAirport}/{arrAirport}/{dateFrom}/{dateTo}")
+    public ModelAndView teleport(@PathVariable String depAirport, @PathVariable String arrAirport,
+                                 @PathVariable String dateFrom, @PathVariable String dateTo) {
+        logger.info("Showing a teleport feature " + depAirport + " " + arrAirport + " " + dateFrom + " " + dateTo);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("teleportList", ryanService.teleport(depAirport, arrAirport, dateFrom, dateTo));
+        modelAndView.setViewName("teleport");
+        return modelAndView;
+    }
+
+    /* Returns all fares for all routes from selected airport */
+    /* Not supported yet */
+    @GetMapping("/teleport/{depAirport}/{arrAirport}/{length}")
+    public ModelAndView teleport(@PathVariable String depAirport, @PathVariable String arrAirport,
+                                 @PathVariable String length) {
+        logger.info("Showing a return teleport feature " + depAirport + " " + arrAirport + " " + length);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("teleportList", ryanService.teleport(depAirport, arrAirport));
+        modelAndView.setViewName("teleport");
         return modelAndView;
     }
 
