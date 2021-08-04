@@ -62,9 +62,7 @@ public class RouteFare {
 
     @Override
         public String toString() {
-            //return price == null ? null : getDayAndMonth() + " " + price;
             return price == null ? null : getDayAndMonth();
 
         }
-        // 2021-09-07 €19.99 or null
     }

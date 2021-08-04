@@ -18,7 +18,7 @@ public class Outbound {
     }
 
     public TreeMap<Price, ArrayList<RouteFare>> getMap() {
-        logger.info("returning map with size " + map.size());
+        logger.info("Returning map with size " + map.size());
         return map;
     }
 

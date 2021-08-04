@@ -48,20 +48,8 @@ public class Result {
             return outbound.arrivalAirport;
         }
 
-        public String getTableInfo() {
-            return String.format("%-7s %50s %30s", getFlightPriceString(), getArrivalAirportString(), getSimpleDateString() + "\n");
-        }
     }
 
-    @Override
-    public String toString() {
-
-        StringBuilder builder = new StringBuilder();
-        for (Flight fare : fares) {
-            builder.append(fare.getTableInfo());
-        }
-        return builder.toString();
-    }
 
     public List<Flight> toList() {
         List<Flight> list = new ArrayList<>();

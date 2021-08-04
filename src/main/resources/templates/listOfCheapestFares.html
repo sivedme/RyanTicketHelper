@@ -29,9 +29,6 @@
     <td th:text="${fare.getFlightPriceString()}"></td>
     <td th:text="${fare.getArrivalAirportString()}"></td>
     <td> <a th:text="${fare.getSimpleDateString()}"></a>
-<!--      <a href="/fares/'/'${fare.getArrivalAirport().iataCode}"></a>-->
-<!--      <a th:href="@{/fares/{dep}/{arr}(dep=${fare.getDepartureAirport().iataCode}, arr=${fare.getArrivalAirport().iataCode})}">Show all</a>-->
-<!--   <input type='button' class="btn-show-all" name='btn-show' value='Show all' th:onclick="|window.location.href='/fares/'${fare.getDepartureAirport().iataCode}'/'${fare.getArrivalAirport().iataCode}|" />-->
     </td>
     <td><a th:href="@{/fares/{dep}/{arr}(dep=${fare.getDepartureAirport().iataCode}, arr=${fare.getArrivalAirport().iataCode})}">Show all</a></td>
   </tr>

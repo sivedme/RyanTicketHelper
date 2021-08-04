@@ -26,11 +26,6 @@ public class RyanServiceImpl implements RyanService {
     }
 
     @Override
-    public List getAllFaresFrom(String airport) {
-        return logic.allFaresFrom(airport.toUpperCase());
-    }
-
-    @Override
     public RouteFareJson getAllFaresForRoute(String depAirport, String arrAirport) {
         return logic.allFaresForRoute(depAirport.toUpperCase(), arrAirport.toUpperCase());
     }

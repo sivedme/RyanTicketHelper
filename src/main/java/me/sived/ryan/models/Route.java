@@ -1,9 +1,5 @@
 package me.sived.ryan.models;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 public class Route {
         String airportFrom, airportTo;
         String connectingAirport;

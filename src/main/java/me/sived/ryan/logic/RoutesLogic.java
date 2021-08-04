@@ -1,6 +1,5 @@
 package me.sived.ryan.logic;
 
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import me.sived.ryan.models.Route;
 
@@ -14,20 +13,18 @@ import java.util.stream.Collectors;
 
 public class RoutesLogic {
 
-    static HttpClient httpClient = HttpClient.newHttpClient();
+    final static HttpClient httpClient = HttpClient.newHttpClient();
 
     public List<Route> from(String airportCode) {
 
         HttpRequest request = HttpRequest.newBuilder().GET()
-                .uri(URI.create("https://services-api.ryanair.com/locate/3/routes/" + airportCode.toUpperCase()))
+                .uri(URI.create("https://services-api.ryanair.com/locate/3/routes/" + airportCode))
                 .build();
 
         try {
-            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-                    .create();
-            Route[] routes = gson.fromJson(httpClient.send(request, HttpResponse.BodyHandlers.ofString()).body(), Route[].class);
-            List<Route> copy = Arrays.stream(routes).parallel().filter(route -> route.getConnectingAirport() == null).collect(Collectors.toList());
-            return copy;
+            Route[] routes = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                    .create().fromJson(httpClient.send(request, HttpResponse.BodyHandlers.ofString()).body(), Route[].class);
+            return Arrays.stream(routes).parallel().filter(route -> route.getConnectingAirport() == null).collect(Collectors.toList());
         } catch (Exception e) {
             e.printStackTrace();
         }

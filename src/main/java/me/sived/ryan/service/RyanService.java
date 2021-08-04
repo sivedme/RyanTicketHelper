@@ -13,7 +13,6 @@ import java.util.Map;
 public interface RyanService {
     Result getCheapestFaresFrom(String airport);
     List<Route> getRoutesFrom(String airport);
-    List getAllFaresFrom(String airport);
     RouteFareJson getAllFaresForRoute(String depAirport, String arrAirport);
     RouteFareJson getAllFaresForRouteAndDates(String depAirport, String arrAirport, String dateFrom, String dateTo);
 

@@ -1,54 +1,35 @@
 package me.sived.ryan.logic;
 
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import me.sived.ryan.models.Result;
 import me.sived.ryan.models.Route;
 import me.sived.ryan.models.RouteFareJson;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Calendar;
+import java.util.Date;
 
 public class FaresLogic {
 
-    static HttpClient httpClient = HttpClient.newHttpClient();
-    Logger logger = LoggerFactory.getLogger(FaresLogic.class);
-
-    // AllFaresLogic (not in use)
-    public List allFaresFrom(String airportCode) {
-
-        ArrayList<RouteFareJson> fares = new ArrayList<>();
-
-        new RoutesLogic().from(airportCode).forEach(iterator ->
-        {
-            try {
-                RouteFareJson temp = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create().fromJson(
-                        httpClient.send(HttpRequest.newBuilder().GET().uri(URI.create("https://www.ryanair.com/api/farfnd/3/oneWayFares/" + iterator.getAirportFrom() + "/" + iterator.getAirportTo() + "/cheapestPerDay?outboundDateFrom=2021-07-01&outboundDateTo=2021-12-31")).build(),
-                                HttpResponse.BodyHandlers.ofString()).body(), RouteFareJson.class);
-                fares.add(temp);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-        return fares;
-    }
+    static final HttpClient httpClient = HttpClient.newHttpClient();
+    final String BASE_LINK = "https://www.ryanair.com/api/farfnd/3/oneWayFares/";
+    final String BASE_LINK_CHEAPEST = "https://services-api.ryanair.com/farfnd/3/oneWayFares?&departureAirportIataCode=";
+    final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
 
-    //AllFaresForRoute
     public RouteFareJson allFaresForRoute(String dep, String arr) {
-        HttpRequest request = HttpRequest.newBuilder().GET().uri(URI.create("https://www.ryanair.com/api/farfnd/3/oneWayFares/" + dep + "/" + arr + "/cheapestPerDay?outboundDateFrom=2021-07-21&outboundDateTo=2023-02-01")).build();
-        return getRouteFareJson(dep, arr, request);
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, 1);
+        return allFaresForRouteAndDates(dep, arr, format.format(new Date()), format.format(calendar.getTime()));
     }
 
     public RouteFareJson allFaresForRouteAndDates(String dep, String arr, String dateFrom, String dateTo) {
-        HttpRequest request = HttpRequest.newBuilder().GET().uri(URI.create("https://www.ryanair.com/api/farfnd/3/oneWayFares/" + dep + "/" + arr + "/cheapestPerDay?outboundDateFrom=" + dateFrom + "&outboundDateTo=" + dateTo)).build();
+        HttpRequest request = HttpRequest.newBuilder().GET().uri(URI.create(BASE_LINK + dep + "/" + arr + "/cheapestPerDay?outboundDateFrom=" + dateFrom + "&outboundDateTo=" + dateTo)).build();
         return getRouteFareJson(dep, arr, request);
     }
 
@@ -66,12 +47,10 @@ public class FaresLogic {
         }
     }
 
-
-    //CheapestFares
     public Result cheapestFaresFrom(String airportCode) {
 
         HttpRequest request = HttpRequest.newBuilder().GET()
-                .uri(URI.create("https://services-api.ryanair.com/farfnd/3/oneWayFares?&departureAirportIataCode=" + airportCode.toUpperCase() + "&language=en&outboundDepartureDateFrom=2020-01-01&outboundDepartureDateTo=2023-07-31"))
+                .uri(URI.create(BASE_LINK_CHEAPEST + airportCode.toUpperCase() + "&language=en&outboundDepartureDateFrom=2020-01-01&outboundDepartureDateTo=2023-07-31"))
                 .build();
 
         try {
